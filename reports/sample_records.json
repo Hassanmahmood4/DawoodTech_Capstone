@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Donald Trump Sends Out Embarrassing New Year's Eve Message",
+    "subject": "News",
+    "date": "December 31, 2017",
+    "label": "Fake"
+  },
+  {
+    "title": "Company XYZ Reports Record Quarterly Earnings",
+    "subject": "Business",
+    "date": "March 15, 2017",
+    "label": "Fake"
+  },
+  {
+    "title": "Scientists Discover Miracle Cure Big Pharma Hides From You",
+    "subject": "Health",
+    "date": "January 8, 2017",
+    "label": "Fake"
+  },
+  {
+    "title": "Trump administration asks Supreme Court to revive travel ban",
+    "subject": "politicsNews",
+    "date": "June 1, 2017",
+    "label": "Real"
+  },
+  {
+    "title": "U.S. stocks close higher as tech shares rally",
+    "subject": "businessNews",
+    "date": "April 12, 2017",
+    "label": "Real"
+  },
+  {
+    "title": "Federal Reserve holds interest rates steady",
+    "subject": "businessNews",
+    "date": "May 3, 2017",
+    "label": "Real"
+  }
+]

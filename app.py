@@ -55,14 +55,18 @@ def load_json(path_str: str) -> dict:
 def load_sample_dataset() -> pd.DataFrame | None:
     fake_path = DATA_DIR / "Fake.csv"
     true_path = DATA_DIR / "True.csv"
-    if not fake_path.exists() or not true_path.exists():
-        return None
+    if fake_path.exists() and true_path.exists():
+        fake_df = pd.read_csv(fake_path).head(200)
+        true_df = pd.read_csv(true_path).head(200)
+        fake_df["label"] = "Fake"
+        true_df["label"] = "Real"
+        return pd.concat([fake_df, true_df], ignore_index=True)
 
-    fake_df = pd.read_csv(fake_path).head(200)
-    true_df = pd.read_csv(true_path).head(200)
-    fake_df["label"] = "Fake"
-    true_df["label"] = "Real"
-    return pd.concat([fake_df, true_df], ignore_index=True)
+    sample_path = REPORTS_DIR / "sample_records.json"
+    if sample_path.exists():
+        return pd.DataFrame(load_json(str(sample_path)))
+
+    return None
 
 
 def render_metric_cards(metrics: dict) -> None:
@@ -198,12 +202,8 @@ def page_dataset() -> None:
 
     if sample_df is not None:
         st.subheader("Sample Records")
-        st.dataframe(
-            sample_df[["title", "subject", "date", "label"]].head(15),
-            width="stretch",
-        )
-    else:
-        st.warning("Dataset files not found in `data/raw/`.")
+        columns = [col for col in ["title", "subject", "date", "label"] if col in sample_df.columns]
+        st.dataframe(sample_df[columns].head(15), width="stretch")
 
 
 def page_eda() -> None:
