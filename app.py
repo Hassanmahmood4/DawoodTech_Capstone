@@ -18,6 +18,26 @@ FIGURES_DIR = REPORTS_DIR / "figures"
 MODELS_DIR = PROJECT_ROOT / "models"
 DATA_DIR = PROJECT_ROOT / "data" / "raw"
 
+EXAMPLE_FAKE = {
+    "title": "Scientists Discover Miracle Cure Big Pharma Hides From You",
+    "text": (
+        "Doctors are stunned by this one weird trick that cures everything overnight. "
+        "The government and pharmaceutical companies do not want you to know about this "
+        "breakthrough discovery. Share this before they take it down. Click here to learn "
+        "the secret they have been hiding for decades."
+    ),
+}
+
+EXAMPLE_REAL = {
+    "title": "Federal Reserve holds interest rates steady",
+    "text": (
+        "WASHINGTON (Reuters) - The Federal Reserve kept interest rates unchanged on Wednesday "
+        "and said it would continue to monitor economic data before making future policy moves. "
+        "Officials noted that inflation has moved closer to the central bank's target while "
+        "the labor market remains solid, signaling a cautious approach in the months ahead."
+    ),
+}
+
 PAGE_NAMES = [
     "Home",
     "Dataset Overview",
@@ -232,16 +252,42 @@ def page_predict() -> None:
         st.error("Trained model not found. Run `python train.py` first.")
         return
 
+    if "predict_title" not in st.session_state:
+        st.session_state.predict_title = ""
+    if "predict_text" not in st.session_state:
+        st.session_state.predict_text = ""
+
+    st.markdown("Try an example:")
+    col_fake, col_real = st.columns(2)
+    with col_fake:
+        if st.button("Load Fake News Example", width="stretch"):
+            st.session_state.predict_title = EXAMPLE_FAKE["title"]
+            st.session_state.predict_text = EXAMPLE_FAKE["text"]
+            st.rerun()
+    with col_real:
+        if st.button("Load Real News Example", width="stretch"):
+            st.session_state.predict_title = EXAMPLE_REAL["title"]
+            st.session_state.predict_text = EXAMPLE_REAL["text"]
+            st.rerun()
+
     with st.form("prediction_form"):
-        title = st.text_input("Article Title", placeholder="Enter the news headline")
+        title = st.text_input(
+            "Article Title",
+            value=st.session_state.predict_title,
+            placeholder="Enter the news headline",
+        )
         text = st.text_area(
             "Article Text",
+            value=st.session_state.predict_text,
             height=220,
             placeholder="Paste the full article body here",
         )
         submitted = st.form_submit_button("Analyze Article", type="primary")
 
     if submitted:
+        st.session_state.predict_title = title
+        st.session_state.predict_text = text
+
         if not title.strip() and not text.strip():
             st.warning("Please provide a title or article text.")
             return
