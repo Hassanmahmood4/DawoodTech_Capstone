@@ -107,16 +107,3 @@ streamlit run app.py
 - Python, Pandas, NumPy, Scikit-learn
 - Matplotlib, Seaborn, Joblib, Streamlit, Jupyter
 
-## Deliverables
-
-- [x] Jupyter notebook: `notebooks/project.ipynb`
-- [x] Streamlit app: `app.py`
-- [x] Trained model: `models/best_model.joblib`
-- [x] Project documentation: `reports/documentation.md`
-- [ ] PDF report export
-- [ ] Presentation slides
-- [ ] Demo video (3–5 minutes)
-
-## Author
-
-DawoodTech Capstone — Week 8 Final Project
