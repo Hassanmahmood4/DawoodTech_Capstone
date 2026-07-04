@@ -1,0 +1,22 @@
+{
+  "total_rows": 44425,
+  "fake_count": 23045,
+  "real_count": 21380,
+  "columns": [
+    "title",
+    "text",
+    "subject",
+    "date",
+    "label ",
+    "label",
+    "combined_text",
+    "text_length",
+    "title_length",
+    "word_count"
+  ],
+  "dropped_empty": 9,
+  "dropped_outliers": 449,
+  "length_cap": 8973,
+  "avg_text_length": 2355.284569499156,
+  "avg_word_count": 406.4675070343275
+}
